@@ -18,6 +18,7 @@ app.use((req, res, next) => {
     console.log("Auth Service received : ", req.method, req.url);
     next();
 });
+
 const baseApi = "/api/v1";
 app.use(`${baseApi}/auth`, router);
 

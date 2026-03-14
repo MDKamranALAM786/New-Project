@@ -1,9 +1,10 @@
 import {Router} from "express";
 import {createProxyMiddleware} from "http-proxy-middleware";
+import httpStatus from "http-status";
 
 const router = Router();
 
-const AUTH_SERVICE_URL = "http://localhost:5001";
+const AUTH_SERVICE_URL = process.env.AUTH_SERVICE_URL;
 
 router.use((req, res, next) => {
     console.log("Gateway forwarding to ", req.method, req.url);
@@ -17,6 +18,10 @@ router.use("/", createProxyMiddleware({
         proxyReq : (proxyReq, req, res) => {
             const newPath = `/api/v1/auth${req.url}`;
             proxyReq.path = newPath;
+        },
+        error : (err, req, res) => {
+            console.log("Proxy Error : ", err.message);
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).json({message : err.message});
         }
     }
 }));

@@ -47,7 +47,7 @@ export const loginUser = async (req, res) => {
 
         let user = await User.findOne({username});
         if(!user) {
-            return(res.status(httpStatus.NOT_FOUND).json("User Not Found"));
+            return(res.status(httpStatus.NOT_FOUND).json({message : "User Not Found"}));
         }
 
         let pass = await bcrypt.compare(password, user.password);
