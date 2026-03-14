@@ -8,8 +8,6 @@ const app = express();
 
 app.set("port", (process.env.PORT || 8080));
 app.use(cors());
-app.use(express.urlencoded({extended : true}));
-app.use(express.json({}));
 
 app.use((req, res, next) => {
     console.log("Gateway Received : ", req.method, req.url);

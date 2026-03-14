@@ -13,8 +13,11 @@ router.use((req, res, next) => {
 router.use("/", createProxyMiddleware({
     target : AUTH_SERVICE_URL,
     changeOrigin : true,
-    pathRewrite : {
-        "^/" : "/api/v1/auth"
+    on : {
+        proxyReq : (proxyReq, req, res) => {
+            const newPath = `/api/v1/auth${req.url}`;
+            proxyReq.path = newPath;
+        }
     }
 }));
 
