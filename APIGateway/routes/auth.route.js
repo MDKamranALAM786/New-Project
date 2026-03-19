@@ -11,7 +11,7 @@ router.use((req, res, next) => {
     next();
 });
 
-router.use("/", createProxyMiddleware({
+router.use(createProxyMiddleware({
     target : AUTH_SERVICE_URL,
     changeOrigin : true,
     on : {
