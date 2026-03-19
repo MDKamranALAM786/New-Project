@@ -14,8 +14,6 @@ app.use((req, res, next) => {
     next();
 });
 
-const baseAPI = "/api/v1";
-// app.use(`${baseAPI}/auth`, authRouter);
 app.use("/api/v1", router);
 
 app.listen(app.get("port"), () => {
