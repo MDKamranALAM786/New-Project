@@ -4,7 +4,7 @@ import {createProxyMiddleware} from "http-proxy-middleware";
 
 const router = Router();
 
-const AUTH_SERVICE_URL = process.env.AUTH_SERVICE_URL;
+const ROUTE_SERVICE_URL = process.env.ROUTE_SERVICE_URL;
 
 router.use((req, res, next) => {
     console.log(`Gateway forwading request to ${req.method} -> ${req.url}`);
@@ -12,11 +12,11 @@ router.use((req, res, next) => {
 });
 
 router.use(createProxyMiddleware({
-    target : AUTH_SERVICE_URL,
-    changeOrigin : true,
+    target : ROUTE_SERVICE_URL,
+    changeOrigin : false,
     on : {
         proxyReq : (proxyReq, req, res) => {
-            const newPath = `/api/v1/auth${req.url}`;
+            const newPath = `/api/v1/route${req.url}`;
             proxyReq.path = newPath;
         },
         error : (err, req, res) => {

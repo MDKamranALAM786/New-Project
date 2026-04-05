@@ -1,7 +1,6 @@
 import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
-import cors from "cors";
 
 import router from "./routes/auth.route.js";
 
@@ -10,7 +9,6 @@ const app = express();
 const DB_URL = process.env.ATLASDB_URL;
 
 app.set("port", (process.env.PORT || 5001));
-app.use(cors());
 app.use(express.urlencoded({extended : true}));
 app.use(express.json({}));
 

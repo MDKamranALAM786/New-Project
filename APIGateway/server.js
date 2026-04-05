@@ -7,7 +7,6 @@ import router from "./routes/route.js";
 const app = express();
 
 app.set("port", (process.env.PORT || 8080));
-app.use(cors());
 
 app.use((req, res, next) => {
     console.log("Gateway Received : ", req.method, req.url);

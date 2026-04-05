@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from "express";
 
 import driver from "./config/connect.js";
-import router from "./routes/route.js";
+import router from "./routes/route.route.js";
 
 const app = express();
 app.set("port", (process.env.PORT || 5002));
