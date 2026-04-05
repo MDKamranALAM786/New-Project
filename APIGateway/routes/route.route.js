@@ -13,7 +13,7 @@ router.use((req, res, next) => {
 
 router.use(createProxyMiddleware({
     target : ROUTE_SERVICE_URL,
-    changeOrigin : false,
+    changeOrigin : true,
     on : {
         proxyReq : (proxyReq, req, res) => {
             const newPath = `/api/v1/route${req.url}`;
