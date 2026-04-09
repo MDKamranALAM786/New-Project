@@ -7,7 +7,7 @@ const router = Router();
 const ROUTE_SERVICE_URL = process.env.ROUTE_SERVICE_URL;
 
 router.use((req, res, next) => {
-    console.log(`Gateway forwading request to ${req.method} -> ${req.url}`);
+    console.log(`Gateway forwarding request to ${req.method} -> ${req.url}`);
     next();
 });
 
