@@ -21,7 +21,7 @@ export const getRoute = async (src, dest) => {
         // processing every path
         records.forEach((record) => {
             let path = [];
-            let travelTime = record._fields[1].toNumber();
+            let travelTime = Number(record._fields[1]);
 
             // get start node of current path
             let start = record._fields[0].start.properties.name;

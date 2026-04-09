@@ -16,6 +16,7 @@ export const getRouteHandler = async (req, res) => {
             return(res.status(httpStatus.OK).json({message : "Path Found", paths : paths}));
         }
     } catch(err) {
-        return(res.status(httpStatus.INTERNAL_SERVER_ERROR).json({message : "Internal Server Error"}));
+        console.log(`Error : ${err.cause}`);
+        return(res.status(httpStatus.INTERNAL_SERVER_ERROR).json({message : err.message}));
     }
 };
