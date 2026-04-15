@@ -35,19 +35,28 @@ const start = async () => {
         console.log(err);
     }
 };
-await start();
 
-let interval = 5 * 60 * 1000;
-const startSimulation = async () => {
+const executeSimulation = async () => {
     try {
         await runSimulation();
-        console.log("Traffic Simulation Updated");
+        console.log("Traffic Simulation Processed");
     } catch(err) {
         console.log("Traffic Simulation Failed");
-        console.log(`Error : ${err.message}`);
+        throw(err);
+    }
+};
+
+let interval = 5 * 60 * 1000;
+let isRunning = false;
+
+const startSimulation = async () => {
+    try {
+        await executeSimulation();
+    } catch(err) {
+        console.log("Simulation Failed");
+        throw(err);
     }
 
-    let isRunning = false;
     setInterval(async () => {
         if(isRunning) {
             return;
@@ -55,14 +64,14 @@ const startSimulation = async () => {
 
         isRunning = true;
         try {
-            await runSimulation();
-            console.log("Traffic Simulation Updated");
+            await executeSimulation();
         } catch(err) {
-            console.log("Traffic Simulation Failed");
-            console.log(`Error : ${err.message}`);
+            console.group("Error caught in setInterval()");
         } finally {
             isRunning = false;
         }
     }, interval);
 };
+
+await start();
 await startSimulation();
