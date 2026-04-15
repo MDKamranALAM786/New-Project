@@ -47,9 +47,11 @@ export const updateAllTraffic = async (congestionLevels) => {
                     WHEN r.type = "main" THEN $main
                     WHEN r.type = "street" THEN $streets
                     ELSE 1.0
-                END AS factor
-            SET r.traffic_factor = factor,
-                r.travel_time = r.base_time * factor
+                END AS baseFactor
+            WITH r,
+                baseFactor + ((rand() - 0.5) * 0.4) AS finalFactor
+            SET r.traffic_factor = finalFactor,
+                r.travel_time = r.base_time * finalFactor
             RETURN COUNT(r) AS updated`,
             {
                 highway : highway,

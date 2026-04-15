@@ -46,7 +46,7 @@ const executeSimulation = async () => {
     }
 };
 
-let interval = 5 * 60 * 1000;
+let interval = 1.5 * 60 * 1000;
 let isRunning = false;
 
 const startSimulation = async () => {

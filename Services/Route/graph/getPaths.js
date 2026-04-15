@@ -8,7 +8,8 @@ export const getRoute = async (src, dest) => {
             MATCH paths=(a:Intersection {name:$src})-[:ROAD*]->(b:Intersection {name:$dest})
             RETURN paths,
                 reduce(time=0, rel IN relationships(paths) | time+rel.travel_time) AS totalTime
-            ORDER BY totalTime`,
+            ORDER BY totalTime
+            LIMIT 2`,
             {src : src, dest : dest}
         );
         if(!result || result.records.length == 0) {
