@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 
-import {getRoute} from "../graph/getPaths.js";
+import {navigate} from "../graph/navigation.js";
 
 export const getRouteHandler = async (req, res) => {
     try {
@@ -9,7 +9,7 @@ export const getRouteHandler = async (req, res) => {
             return(res.status(httpStatus.BAD_REQUEST).json({message : "Missing Source/Destination"}));
         }
 
-        let path = await getRoute(src, dest);
+        let path = await navigate(src, dest);
         if(!path) {
             return(res.status(httpStatus.NOT_FOUND).json({message : "No Route Found"}));
         } else {

@@ -31,9 +31,7 @@ export const projectGraph = async (session) => {
     }
 };
 
-export const getRoute = async (src, dest) => {
-    let session = driver.session({database : "routing-project"});
-
+export const getRoute = async (src, dest, session) => {
     try {
         await projectGraph(session);
         const result = await session.run(`
@@ -81,9 +79,7 @@ export const getRoute = async (src, dest) => {
 
         return(shortestPath);
     } catch(err) {
-        console.log(`Error : ${err.cause}`);
-        return(null);
-    } finally {
-        await session.close();
+        console.log(`Error in getPaths : ${err}`);
+        throw(err);
     }
 };
