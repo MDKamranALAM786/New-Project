@@ -9,11 +9,11 @@ export const getRouteHandler = async (req, res) => {
             return(res.status(httpStatus.BAD_REQUEST).json({message : "Missing Source/Destination"}));
         }
 
-        let paths = await getRoute(src, dest);
-        if(!paths || paths.length == 0) {
+        let path = await getRoute(src, dest);
+        if(!path) {
             return(res.status(httpStatus.NOT_FOUND).json({message : "No Route Found"}));
         } else {
-            return(res.status(httpStatus.OK).json({message : "Path Found", paths : paths}));
+            return(res.status(httpStatus.OK).json({message : "Path Found", path : path}));
         }
     } catch(err) {
         console.log(`Error : ${err.cause}`);
